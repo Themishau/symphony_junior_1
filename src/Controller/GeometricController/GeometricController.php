@@ -12,7 +12,7 @@ class GeometricController extends AbstractController
 {
 
     #[Route('/api/geometric/{size}', name: 'api_geometric', methods: ['GET'])]
-    public function index(): Response
+    public function getGeometricSequence(): Response
     {
         return new JsonResponse(['geometric' => 'test geo Hello']);
     }

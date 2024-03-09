@@ -136,3 +136,15 @@ i create a new symphony project
 composer create-project symfony/skeleton junior-task
 
 
+I had some namespace problems. It was caused by wrong path
+
+
+https://symfony.com/doc/current/best_practices.html#fetching-services
+
+
+        // add the results of computed sequences in an array
+        return array_push($this->calculateFibonacciSequence(($size - 1)), $size);
+
+        does not seem to work. save it in variable instead 
+
+https://symfony.com/bundles/NelmioApiDocBundle/current/index.html for later :)
