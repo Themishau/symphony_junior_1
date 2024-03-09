@@ -4,36 +4,32 @@ namespace App\Service\FibonacciService;
 
 class FibonacciService
 {
-    
+    // caching to reduce computing time if size is big because of Big O
+    private $cache = [0,1];
+
+
     public function getFibonacciSequence(int $size)
     {
-
-        // Base case for size 0 or 1
-        if ($size <= 0) {
-            return [];
+        for ($i = 2; $i <= $size; $i++) 
+        { 
+            $this->calculateFibonacciSequence($size);
         }
-        elseif ($size == 1)
-        {
-            return [0];
-        }
-        elseif ($size == 2)
-        {
-            return [0, 1];
-        }
-
-        
-        // Recursive case
-        $sequence = $this->getFibonacciSequence($size - 1); // 3 -> [0,1]
-        $lastElement = end($sequence); // Get the last element
-        $secondLastElement = $sequence[count($sequence) - 2]; // Get the second last element
-        $sequence[] = $lastElement + $secondLastElement; // Add the next Fibonacci number
-
+        return $this->cache;
     }
 
-    private function calculateFibonacciSequence()
+
+    public function calculateFibonacciSequence(int $size)
     {
 
-    }
+        // If the sequence is already in the cache, return it
+        if (isset($this->cache[$size])) {
+            return $this->cache[$size];
+        }
 
+        // Calculate the sequence and store it in the cache
+        $this->cache[$size] = $this->calculateFibonacciSequence($size - 1) + $this->calculateFibonacciSequence($size - 2);
+
+        return $this->cache[$size];
+    }
 
 }

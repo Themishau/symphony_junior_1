@@ -147,4 +147,6 @@ https://symfony.com/doc/current/best_practices.html#fetching-services
 
         does not seem to work. save it in variable instead 
 
+big issues with null / array type etc. ? i dont have it in other languages
+
 https://symfony.com/bundles/NelmioApiDocBundle/current/index.html for later :)
