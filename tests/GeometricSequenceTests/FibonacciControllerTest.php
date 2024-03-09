@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\tests\FibonacciTests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Service\FibonacciService\FibonacciService;

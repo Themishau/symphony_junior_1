@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\tests\GeometricSequenceTests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Controller\GeometricController\GeometricController;
