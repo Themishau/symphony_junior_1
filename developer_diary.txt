@@ -1,0 +1,138 @@
+Junior_Task Diary
+
+explanation: 
+This is a diary to show my process regarding the JUNIOR_TASK given to me. I also include the ideas and reasons behind which OS, IDE and so on I use. 
+Nevertheless, I am also influenced by the side notes and information givin by Dirk.
+
+The amount of preparation for this task might be a little 'overkill' but it is how I would like to structure and prepare a project. 
+I am now used to structure my project to add additional projects / and continue to work on this project on any other workstation/pc.
+
+Dirk told me about saving code not at the 'host server', but for this project it is ok, to do it. He also talked about 'makefiles', which I used before for some other projects. 
+For sure, I am not able to ignore this information and did some research on saving data not a the local host server. 
+
+This Diary might be hard to read, but shows how I work. 
+I do not have any experience with docker or Fedora Linux which I am using.
+
+
+
+pseudo makefile:
+
+PORT?=8082
+
+.PHONY: start
+start:
+	docker build -t my-php-apache .
+	docker run --name apache -d -p $(PORT):80 --mount type=bind,source="$(CURDIR)"/htdocs,target=/var/www/html my-php-apache
+
+.PHONY: stop
+stop:
+	docker stop apache
+	docker rm apache
+
+.PHONY: logs
+logs:
+	docker container logs apache
+
+.PHONY: login
+login:
+	docker exec -it apache bash
+
+.PHONY: status
+status:
+	docker ps -f name=apache
+
+
+dockerfile: 
+
+FROM php:apache
+SHELL ["/bin/bash", "-c"]
+RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-enabled/
+RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
+COPY php.ini /usr/local/etc/php/
+
+To use this setup, you would:
+
+    Create a Dockerfile in your project directory with the content provided above.
+    Create a Makefile in your project directory with the content provided above.
+    Run make start to build and start your Docker container.
+    Access your application at http://localhost:8082/ (or whatever port you specified).
+
+
+Project Structure: 
+/my-project
+    Dockerfile
+    Makefile
+    /src
+        /app
+            index.php
+            /css
+            /js
+        /config
+            php.ini
+            .htaccess
+    /tests
+        /unit
+        /integration
+    /docs
+    /lib
+    /vendor
+
+ 
+
+create a backend with symphony 
+-> how to create a symphony project? 
+-> the first thing I found beside the documentation on the official site 
+   was here https://dev.to/hantsy/-building-restful-apis-with-symfony-5-and-php-8-1p2e 
+   -> It as too much information, but I focused on some keywords like symphony controller, creating templates/skeletons, factory? to create a new post instance?
+   -> I do not use any database so doctrine is useless for me now
+
+-> because I have to build three functions which compute things and the output is goal I want to do it based on Tests. TDD? 
+-> How can I test it? There seem to be a Framework PHPUnit, which is also used by Symphony. 
+
+# php bin/console make:test
+   
+ install php 
+https://developer.fedoraproject.org/tech/languages/php/php-installation.html
+
+
+
+ERROR 
+mz@fedora:~/Git_Symphony_Junioren_Task/symphony_junior_1$ make build
+docker build -t symfony-junior-task-api-image .
+ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+make: *** [makefile:7: build] Error 1
+mz@fedora:~/Git_Symphony_Junioren_Task/symphony_junior_1$ ^C
+mz@fedora:~/Git_Symphony_Junioren_Task/symphony_junior_1$ 
+
+
+do it in folder!
+sudo usermod -aG docker mz
+newgrp docker
+sudo systemctl status docker -- check if everything is ok
+sudo systemctl restart docker
+su mz -- it helped here
+
+IN VS CODE TERMINAL / FOLDER 
+
+Run ' make build ' to build your Docker image.
+Run ' make start ' to start your Docker container.
+
+
+error!
+
+8.318 The following packages have unmet dependencies:
+8.474  libapache2-mod-php8.2 : Depends: php8.2-cli but it is not installable
+8.474                          Depends: php8.2-common (= 8.2.7-1~deb12u1) but it is not installable
+8.474                          Depends: php8.2-opcache but it is not installable
+8.487 E: Unable to correct problems, you have held broken packages.
+
+I assume that the version in makefile is not supported yet by apache -> not working
+Delete installed php version on fedora? 
+
+i dont know how to fix it
+
+i create a new symphony project
+
+composer create-project symfony/skeleton junior-task
+
+
