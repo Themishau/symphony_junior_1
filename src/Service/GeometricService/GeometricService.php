@@ -4,8 +4,17 @@ namespace App\Service\GeometricService;
 
 class GeometricService
 {
-    public function calculateGeometric(int $size)
+    public function getGeometricSequence(int $start, float $ratio, int $size)
     {
-        echo "<h2> Geo" . $size . "</h2>";
+        $sequence = [$start];
+
+        for ($i=0; $i < $size; $i++) { 
+            if ($ratio == 0)
+                return $sequence;
+            $sequence[] = $start * $ratio;
+            
+        }
+
+
     }
 }

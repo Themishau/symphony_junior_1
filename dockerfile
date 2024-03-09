@@ -28,4 +28,4 @@ RUN composer install
 EXPOSE 80
 
 # Start Apache in the foreground
-CMD ["apache2-foreground"]
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]

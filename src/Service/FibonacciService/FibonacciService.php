@@ -4,7 +4,7 @@ namespace App\Service\FibonacciService;
 
 class FibonacciService
 {
-    // caching to reduce computing time if size is big because of Big O
+    // Caching to reduce computing time if size is big because of Big O
     private $cache = [0,1];
 
 
@@ -14,7 +14,8 @@ class FibonacciService
         { 
             $this->calculateFibonacciSequence($size);
         }
-        return $this->cache;
+        // We get to many elements, we need to trim it a little bit
+        return array_slice($this->cache, 0, $size);
     }
 
 
