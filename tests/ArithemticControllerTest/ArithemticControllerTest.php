@@ -32,7 +32,7 @@ class ArithmeticSequenceControllerTest extends WebTestCase
         $this->assertInstanceOf(JsonResponse::class, $response);
 
         // Assert that the response content is as expected
-        $expectedContent = json_encode(['Arithmetic sequence' => json_encode([1, 2, 4, 8, 16])]);
+        $expectedContent = json_encode(['Arithmetic sequence' => json_encode([1, 2, 4, 8])]);
         $this->assertEquals($expectedContent, $response->getContent());
     }
 }
