@@ -23,6 +23,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install Symfony dependencies
 RUN composer install
+RUN composer require nelmio/api-doc-bundle
+RUN composer require symfony/twig-bundle
+RUN composer require symfony/asset
 
 # Expose port 80
 EXPOSE 80

@@ -1,0 +1,16 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/fibonacci": {
+            "post": {
+                "summary": "Get Fibonacci sequence",
+                "description": "Compute and return the Fibonacci sequence up to a specified size",
+                "operationId": "getFibonacciSequence",
+                "requestBody": {
+                    "content": {}
+                },
+                "responses": {}
+            }
+        }
+    }
+}
