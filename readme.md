@@ -13,7 +13,7 @@ This project demonstrates the creation of a Symfony application that provides a 
 - PHP 8.2 or higher
 - Symfony 6.x
 - Git for source code management
-
+  
 ## Installation
 1. Clone the repository:
 
@@ -37,7 +37,7 @@ symfony server:start
 
 The API provides endpoints for generating each type of sequence. The client can specify the parameters for the sequence in the request body.
 
-### Arithmetic Sequence
+### Arithmetic Sequence (WIP)
 
 Endpoint: `/api/arithmetic`
 
@@ -64,6 +64,10 @@ Request Body:
 ```
 - json { "size": 10 }
 ```
+
+## Dockerfile and Makefile (WIP)
+
+There is also a Dockerfile and Makefile to use this API with Docker. 
 
 ## Contributing
 
